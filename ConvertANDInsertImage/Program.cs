@@ -1,6 +1,8 @@
 ﻿
 
-using Microsoft.EntityFrameworkCore;
+using ConvertANDInsertImage.DataContext;
+using ConvertANDInsertImage.Model;
+using System.Text.RegularExpressions;
 
 namespace ConvertANDInsertImage
 {
@@ -8,62 +10,65 @@ namespace ConvertANDInsertImage
     {
         // private ISMSSenderService smsSenderService = new SMSSenderService();
 
-        static async Task Main(string[] args)
+        static void Main(string[] args)
         {
-            //long[] arr = {26032,26036,26038,26042,26050 };
-              
 
+            Console.WriteLine("Insert New Employee Record");
+            Console.WriteLine(".............................");
 
-            using (GBContext db=new GBContext())
+            InsertRecord();
+
+            /*
+
+            var files = Directory.GetFiles("D:\\ApplicantImage", "*.*", SearchOption.AllDirectories);
+
+            List<string> imageFiles = new List<string>();
+            foreach (string filename in files)
             {
-                int inc = 0;
-                var lst = db.sELECTECandidates/*.Where(x=> arr.Contains(x.ApplicantionId) )*/.ToList();
-                foreach(var l in lst)
+
+                string pattern = @"585";
+
+                if (Regex.IsMatch(filename, pattern))
                 {
-                    inc += 1;
-                    string imagePath = @"/ApplicantImage";
-                    DirectoryInfo dir_img = new DirectoryInfo(imagePath);
-                    FileInfo[] files_img = dir_img.GetFiles(l.Name+"_"+l.ApplicantionId+"_*", SearchOption.TopDirectoryOnly);
-                    foreach (var item in files_img)
-                    {
-                        byte[] file;
-                        using (var stream = new FileStream(item.FullName, FileMode.Open, FileAccess.Read))
-                        {
-                            using (var reader = new BinaryReader(stream))
-                            {
-                                file = reader.ReadBytes((int)stream.Length);
-
-                                l.ApplicantImage = file;
-                                l.ApplicantImagePath = item.FullName;
-                            }
-                        }
-                    }
-                    string signaturePath = @"/ApplicantImage";
-                    DirectoryInfo dir_sign = new DirectoryInfo(signaturePath);
-                    FileInfo[] files_sign = dir_sign.GetFiles(l.Name + "_" + l.ApplicantionId + "_*", SearchOption.TopDirectoryOnly);
-                    foreach (var item in files_sign)
-                    {
-                        byte[] file;
-                        using (var stream = new FileStream(item.FullName, FileMode.Open, FileAccess.Read))
-                        {
-                            using (var reader = new BinaryReader(stream))
-                            {
-                                file = reader.ReadBytes((int)stream.Length);
-
-                                l.ApplicantSignature = file;
-                                l.ApplicantSignaturePath= item.FullName;
-                            }
-                        }
-                    }
-                    var obj = db.sELECTECandidates.FirstOrDefault(x => x.ApplicantionId == l.ApplicantionId);
-                    obj.ApplicantImage = l.ApplicantImage;
-                    obj.ApplicantSignature= l.ApplicantSignature;
-                    db.Update(obj);
-                    db.SaveChanges();
-                    Console.WriteLine(inc);
+                    //string filepath = @"D:\ApplicantImage" + filename.Trim();
+                    imageFiles.Add(filename);
+                    byte[] imageArray = System.IO.File.ReadAllBytes(filename);
+                    string base64ImageRepresentation = Convert.ToBase64String(imageArray);
                 }
             }
+
+            */
+
+
         }
-    }
+
+        static void InsertRecord()
+        { 
+            string stcode, stname, email;
+
+            Console.WriteLine("Enter Employee Code");
+            stcode = Console.ReadLine();
+
+            Console.WriteLine("Enter Employee Name");
+            stname = Console.ReadLine();
+
+            Console.WriteLine("Enter Email");
+            email = Console.ReadLine();
+
+            using (var conn = new ApplicationDbContext())
+            { 
+                EmployeeClass emp = new EmployeeClass();
+                emp.EmployeeCode = stcode.ToString();
+                emp.EmployeeName = stname.ToString();
+                emp.email = email.ToString();
+                conn.Add(emp);
+                conn.SaveChanges();
+
+            }
+            return;
+        }
+
+
+    }// End Namespace
 
 }
