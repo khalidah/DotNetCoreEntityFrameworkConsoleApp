@@ -3516,11 +3516,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Khalid\\source\\repos\\ConvertANDInsertImage\\ConvertANDInsertImage\\ConvertANDInsertImage.csproj",
+      "projectUniqueName": "D:\\InsertDataDotNetCore\\DotNetCoreEntityFrameworkConsoleApp\\ConvertANDInsertImage\\ConvertANDInsertImage.csproj",
       "projectName": "ConvertANDInsertImage",
-      "projectPath": "C:\\Users\\Khalid\\source\\repos\\ConvertANDInsertImage\\ConvertANDInsertImage\\ConvertANDInsertImage.csproj",
+      "projectPath": "D:\\InsertDataDotNetCore\\DotNetCoreEntityFrameworkConsoleApp\\ConvertANDInsertImage\\ConvertANDInsertImage.csproj",
       "packagesPath": "C:\\Users\\Khalid\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Khalid\\source\\repos\\ConvertANDInsertImage\\ConvertANDInsertImage\\obj\\",
+      "outputPath": "D:\\InsertDataDotNetCore\\DotNetCoreEntityFrameworkConsoleApp\\ConvertANDInsertImage\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
